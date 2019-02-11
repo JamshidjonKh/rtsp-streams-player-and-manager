@@ -17,3 +17,7 @@ code {
   width: 640px;
   height: 360px;
 }
+
+#videoCanvas {
+  position: relative;
+}

@@ -3,30 +3,22 @@ import classNames from 'classnames'
 import {Button} from 'react-bootstrap'
 import { getRtsp } from '../store/actions/streams'
 class Card extends PureComponent {
+	
 	state = {
 		title: '',
 		url: '',
-		done: false,
-		editing: false,
-		randomKey: Math.random()
+		editing: false
 	}
 
-	getRandomKey = docId => {
-		console.log('getRandomKey');
-		this.setState({ randomKey: Math.random() });
-	  }
-	
-
-	constructor () {
-		super()
+	constructor (props) {
+		super(props)
 		this.playInBrowser = this.playInBrowser.bind(this)
 	  }
 	
 	  playInBrowser () {
 		 console.log('this.state.url: ', this.state.url)
-		let res = getRtsp(this.state.url);
-		
-		
+		 let res = getRtsp(this.state.url);
+		 
 	  }
 
 
@@ -79,10 +71,6 @@ class Card extends PureComponent {
 				<div className="card-body">
 					<input type="text" name="title" className="card-title form-control" value={title} onChange={this.handleInputChange}/>
 					<textarea name="url" className="card-text form-control mb-3" rows="4" value={url} onChange={this.handleInputChange}/>
-					<div className="form-group form-check">
-						<input type="checkbox" className="form-check-input" id="streamDone" name="done" onChange={this.handleInputChange} checked={done}/>
-						<label className="form-check-label" htmlFor="streamDone">Done</label>
-					</div>
 					<button className="btn btn-success mr-3" onClick={this.saveStream}>Save</button>
 					<button className="btn btn-danger" onClick={() => this.setState({editing: false})}>Сancel</button>
 				</div>

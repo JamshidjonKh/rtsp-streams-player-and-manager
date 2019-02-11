@@ -17,15 +17,6 @@ class VideoStream extends EventEmitter {
   }
 
   stream2Socket(server) {    
-    /* var option = {
-      headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE",
-          "Access-Control-Allow-Headers": "Content-Type"
-      },
-      port: this.port
-  };
-    const server = new WebSocket.Server(option) */
     
     server.on('connection', (socket) => {
       console.log(`New connection: ${this.name}`)
