@@ -21,3 +21,10 @@ Run the server(port: 5000) and client(port: 3000)
 ```sh
 npm run dev
 ```
+
+exmaple rtsp video url:
+
+```sh
+rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov
+```
+
