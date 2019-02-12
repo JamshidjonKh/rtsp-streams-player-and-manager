@@ -8,8 +8,8 @@ Install all dependencies
 ```sh
 npm i
 ```
-make sure you have ffmpeg installed on your computer and available in your %path% enviorement variable.
-in windows:
+make sure you have [ffmpeg](https://www.ffmpeg.org/) installed on your computer and available in your %path% enviorement variable.
+for instance, in windows:
 ```sh
 C:\ffmpeg\bin
 ```
