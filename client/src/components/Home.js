@@ -9,6 +9,7 @@ import Card from './Card';
 import {jsmpeg } from 'jsmpeg'
 import {Helmet} from "react-helmet";
 
+
 class Home extends Component {
 
 	constructor(props) {
@@ -19,6 +20,7 @@ class Home extends Component {
 			video: false
 		};
 		this.setVideoState=this.setVideoState.bind(this);
+		this.renderVideo = this.renderVideo.bind(this);
 	}
 	
 	
@@ -65,11 +67,24 @@ class Home extends Component {
 	}
 
 	setVideoState(){
+		this.state.video = true;
+		console.log('this is setVideoState function. video state is:', this.state.video);
+		this.renderVideo();
+	}
+
+	forceHomeRender(){
+		setTimeout(function() {
+
+		}, 6000);
 		this.setState({video: true});
-		//this.state.video = true;
 	}
 
 	renderVideo(){
+		setTimeout(function() {
+
+		}, 6000);
+		//this.setState({video: true});
+		console.log('this is renderVideo function. video state is:', this.state.video);
 		//if(this.state.video){
 			return(
 				<div>
@@ -78,20 +93,27 @@ class Home extends Component {
 				<Helmet 
 					script={[{ 
 						type: 'text/javascript', 
-						innerHTML: `
+						innerHTML: 
+						`
 						
 						var canvas = document.getElementById('videoCanvas');
 						var ws = new WebSocket("ws://localhost:9999");
-							var player = new jsmpeg(ws, {canvas:canvas, autoplay:true,audio:false,loop: true});
-						  
-						
-						
+
+						var player = new jsmpeg(ws, {canvas:canvas, autoplay:true,audio:false,loop: true});
+
+						ws.onopen ( function incoming(data) {
+							console.log('started');
+						  });
+						ws.onmessage ( function incoming(data) {
+							console.log(data);
+						  });
 						`
 					}]} />
 
 				</div>
 			)
-			//	}
+		//}
+			
 		
 	}
 
@@ -132,7 +154,7 @@ class Home extends Component {
 						// Stream
 						streams.streams.map(stream => {
 							return (
-								<Card {...stream} removeStream={this.onRemoveStream} editStream={this.onEditStream} key={stream.id}/>
+								<Card {...stream} removeStream={this.onRemoveStream} editStream={this.onEditStream} setVideoState={this.setVideoState} key={stream.id}/>
 							)
 						})
 					}

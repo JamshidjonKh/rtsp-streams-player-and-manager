@@ -1,19 +1,19 @@
-let VideoStream =require('../node-rtsp-stream-es6')
+//const VideoStream =require('../node-rtsp-stream-es6')
 const express = require('express')
 const router = express.Router()
 const passport = require('passport')
 
-const WebSocket = require('ws');
+const server = require('../server');
 
-var option = {
+/* var option = {
 	headers: {
 		"Access-Control-Allow-Origin": "*",
 		"Access-Control-Allow-Methods": "GET,PUT,POST,DELETE",
 		"Access-Control-Allow-Headers": "Content-Type"
 	},
 	port: 9999
-};
-  const wsServer = new WebSocket.Server(option)
+}; */
+  //const wsServer = new WebSocket.Server(option)
 
 router.post(
 	'/',
@@ -33,8 +33,8 @@ router.post(
           }
       
           
-          videoStream = new VideoStream(wsServer, options)
-          videoStream.start()
+          server.vs.stream2SocketChange(server.ws, options);
+          server.vs.start()
           
          /*  try{
             stream = new Stream(options)

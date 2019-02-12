@@ -13,10 +13,10 @@ class VideoStream extends EventEmitter {
     this.height = options.height
     this.port = options.port
     this.stream = void 0
-    this.stream2Socket(webSocket)
+    this.stream2SocketStart(webSocket)
   }
 
-  stream2Socket(server) {    
+  stream2SocketStart(server) {    
     
     server.on('connection', (socket) => {
       console.log(`New connection: ${this.name}`)
@@ -37,11 +37,20 @@ class VideoStream extends EventEmitter {
       })
 
       socket.on('close', () => { console.log(`${this.name} disconnected !`) })
-
- 
-
      
     })
+  }
+
+
+  stream2SocketChange(webSocket, options) {   
+    
+    this.name = options.name
+    this.url = options.url
+    this.width = options.width
+    this.height = options.height
+    this.port = options.port
+    this.stream = void 0
+    this.stream2SocketStart(webSocket)
   }
 
   onSocketConnect(socket) {

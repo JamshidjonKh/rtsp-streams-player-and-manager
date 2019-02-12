@@ -7,6 +7,8 @@ const db = require('./db');
 const users = require('./routes/user')
 const streams = require('./routes/streams')
 const rtsp = require('./routes/rtsp')
+const VideoStream =require('./node-rtsp-stream-es6')
+const webSocket = require('ws');
 
 mongoose
 	.connect(
@@ -42,3 +44,26 @@ app.listen(PORT, () => {
 })
 
 
+var option = {
+	headers: {
+		"Access-Control-Allow-Origin": "*",
+		"Access-Control-Allow-Methods": "GET,PUT,POST,DELETE",
+		"Access-Control-Allow-Headers": "Content-Type"
+	},
+	port: 9999
+};
+var ws = new webSocket.Server(option)
+
+
+         const options = {
+            name: 'streamName',
+            url: 'rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov',
+            port: 9999
+          }
+      
+          
+          var vs = new VideoStream(ws, options)
+          vs.start()
+
+		  module.exports.ws = ws;
+		  module.exports.vs = vs;

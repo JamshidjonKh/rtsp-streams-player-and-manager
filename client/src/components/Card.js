@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react'
 import classNames from 'classnames'
 import {Button} from 'react-bootstrap'
 import { getRtsp } from '../store/actions/streams'
+
+
 class Card extends PureComponent {
 	
 	state = {
@@ -18,6 +20,8 @@ class Card extends PureComponent {
 	  playInBrowser () {
 		 console.log('this.state.url: ', this.state.url)
 		 let res = getRtsp(this.state.url);
+
+		 this.props.setVideoState();
 		 
 	  }
 
